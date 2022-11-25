@@ -8,7 +8,7 @@ function Footer() {
         theme === 'broccoli' ? 'bg-emerald-800' : 'bg-red-600'
       }`}
     >
-      <p>Plutot Merguez ou Broccoli ?</p>
+      <p>Plutôt Merguez ou Broccoli ?</p>
       <div className="toogle-btn">
         <label htmlFor="toogleTheme" onClick={() => toogleTheme()}>
           {' '}

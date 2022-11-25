@@ -1,39 +1,73 @@
 import { useEffect, useState } from 'react'
-import { useTheme } from '../../utils/hooks'
+import { useElementsDraw, useTheme } from '../../utils/hooks'
 import List from '../List'
+import Loader from '../Loader'
 
-function DrawResult({ choices, setShowResult }) {
+function DrawResult({ setShowResult }) {
+  const { elementsDraw } = useElementsDraw()
   const { theme } = useTheme
   const [isLoading, setLoading] = useState(true)
-  const [isSelectedId, setSelectedId] = useState(0)
+  const [isSelectedId, setSelectedId] = useState(null)
+  const [isCurrentId, setCurrentId] = useState(0)
 
-  const maxId = choices.length - 1
-  const winner = Math.floor(Math.random() * choices.length)
+  const maxId = elementsDraw.length - 1
+
+  const chooseWinner = () => {
+    setLoading(true)
+    const winner = Math.floor(Math.random() * elementsDraw.length)
+    // const winner = 2
+
+    let count = 0
+
+    const intervalId = setInterval(() => {
+      setCurrentId((isCurrentId) => {
+        if (
+          count > elementsDraw.length * 2 &&
+          (winner === 0 ? isCurrentId === maxId : isCurrentId === winner - 1)
+        ) {
+          setSelectedId(winner)
+          setLoading(false)
+          clearInterval(intervalId)
+          return null
+        }
+        return isCurrentId === maxId ? 0 : isCurrentId + 1
+      })
+      count++
+    }, 500)
+  }
 
   useEffect(() => {
-    let count = 0
-    const intervalId = setInterval(() => {
-      setSelectedId((isSelectedId) =>
-        isSelectedId === maxId ? 0 : isSelectedId + 1
-      )
-      count++
-      if (count === winner + choices.length) {
-        setLoading(false)
-        clearInterval(intervalId)
-      }
-    }, 500)
+    chooseWinner()
   }, [])
 
   const back = () => {
     setShowResult(false)
   }
+
+  const restartDraw = () => {
+    setSelectedId(null)
+    setCurrentId(0)
+    chooseWinner()
+  }
   return (
     <>
-      {isLoading ? <p>Tirage en cours...</p> : <p>Le gagnant est</p>}
-      <List list={choices} isSelectedId={isSelectedId} theme={theme} />
-      <button className="btn btn-secondary" onClick={back}>
-        Modifier ✍️
-      </button>
+      {isLoading ? <Loader /> : <h2 className="h-10 block">Le gagnant est</h2>}
+      <List
+        isSelectedId={isSelectedId}
+        isCurrentId={isCurrentId}
+        theme={theme}
+      />
+      <div className="flex flex-col justify-center sm:flex-row">
+        <button
+          className="btn btn-secondary mb-4 sm:mr-4 sm:mb-0"
+          onClick={back}
+        >
+          ⎌ Modifier
+        </button>
+        <button className="btn btn-secondary" onClick={restartDraw}>
+          ⇤ Nouveau tirage
+        </button>
+      </div>
     </>
   )
 }

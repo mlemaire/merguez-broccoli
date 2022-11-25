@@ -1,21 +1,21 @@
 import { useState } from 'react'
-import { useTheme } from '../../utils/hooks'
+import { useTheme, useElementsDraw } from '../../utils/hooks'
 import List from '../List'
 
-function CreateDraw({ choices, setChoices, setShowResult }) {
+function CreateDraw({ setShowResult }) {
+  const { elementsDraw, saveElementsDraw, removeElementsDraw } =
+    useElementsDraw()
   const { theme } = useTheme()
   const [inputValue, setInputValue] = useState('')
 
   const addChoice = (e) => {
     e.preventDefault()
-    setChoices([...choices, inputValue])
+    saveElementsDraw(inputValue)
     setInputValue('')
   }
 
-  const removeChoices = () => setChoices([])
-
   const showResult = () => {
-    if (!choices.length) return
+    if (!elementsDraw.length) return
     setShowResult(true)
   }
 
@@ -46,23 +46,23 @@ function CreateDraw({ choices, setChoices, setShowResult }) {
           +
         </button>
       </form>
-      {choices.length > 0 && (
+      {elementsDraw.length > 0 && (
         <>
           <button
             className="btn btn-tertiary"
-            onClick={removeChoices}
-            disabled={!choices.length}
+            onClick={removeElementsDraw}
+            disabled={!elementsDraw.length}
           >
             Tout supprimer
           </button>
-          <List list={choices} />
+          <List />
         </>
       )}
 
       <button
         className="btn btn-secondary mt-8"
         onClick={showResult}
-        disabled={!choices.length}
+        disabled={!elementsDraw.length}
       >
         Tirer au sort
       </button>

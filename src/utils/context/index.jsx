@@ -14,3 +14,23 @@ export const ThemeProvider = ({ children }) => {
     </ThemeContext.Provider>
   )
 }
+
+export const ElementsDrawContext = createContext()
+
+export const ElementsDrawProvider = ({ children }) => {
+  const [elementsDraw, setElementsDraw] = useState([])
+  const saveElementsDraw = (newElement) => {
+    setElementsDraw([...elementsDraw, newElement])
+  }
+  const removeElementsDraw = () => {
+    setElementsDraw([])
+  }
+
+  return (
+    <ElementsDrawContext.Provider
+      value={{ elementsDraw, saveElementsDraw, removeElementsDraw }}
+    >
+      {children}
+    </ElementsDrawContext.Provider>
+  )
+}
