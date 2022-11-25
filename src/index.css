@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply px-4 py-2 rounded-md transition-colors;
+}
+
+.btn-primary-b {
+  @apply bg-emerald-800 text-white text-3xl p-0;
+}
+
+.btn-primary-m {
+  @apply bg-red-800 text-white text-3xl p-0;
+}
+
+.btn-primary-b:hover {
+  @apply bg-emerald-600;
+}
+
+.btn-primary-m:hover {
+  @apply bg-red-600;
+}
+
+.btn-secondary {
+  @apply bg-cyan-600 text-white text-2xl px-10;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  @apply bg-cyan-500;
+}
+
+.btn-secondary:disabled {
+  @apply bg-slate-400 cursor-not-allowed;
+}
+
+.btn-tertiary {
+  @apply underline text-cyan-700;
+}
+
+.btn-tertiary:hover {
+  @apply text-cyan-500;
+}
+
+.toogle-btn {
+  @apply flex m-4;
+}
+.toogle-btn label {
+  @apply h-7 w-12 cursor-pointer relative bg-red-900 rounded-2xl block -indent-40 overflow-hidden;
+  @apply after:bg-white after:absolute after:top-1 after:left-1 after:w-5 after:h-5 after:rounded-2xl after:transition-all;
+  @apply active:after:w-7;
+}
+.toogle-btn:has(input:checked) label {
+  @apply after:left-6;
+  @apply bg-slate-800;
+  @apply active:after:w-7 active:after:left-4;
+}

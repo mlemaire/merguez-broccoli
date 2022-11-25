@@ -5,6 +5,7 @@ import Root from './routes/Root'
 import Error from './routes/Error'
 
 import Draw from './routes/Draw'
+import './index.css'
 
 const router = createBrowserRouter([
   {

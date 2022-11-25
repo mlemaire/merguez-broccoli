@@ -1,16 +1,15 @@
 import { useState } from 'react'
+import { useTheme } from '../../utils/hooks'
+import List from '../List'
 
 function CreateDraw({ choices, setChoices, setShowResult }) {
+  const { theme } = useTheme()
   const [inputValue, setInputValue] = useState('')
 
-  const handleClick = (e) => {
+  const addChoice = (e) => {
     e.preventDefault()
-    addChoice(inputValue)
+    setChoices([...choices, inputValue])
     setInputValue('')
-  }
-
-  const addChoice = (newChoice) => {
-    setChoices([...choices, newChoice])
   }
 
   const removeChoices = () => setChoices([])
@@ -27,22 +26,44 @@ function CreateDraw({ choices, setChoices, setShowResult }) {
         Ajoutez plusieurs éléments à tirer au sort, puis cliquez sur "Tirer au
         sort"
       </p>
-      <form onSubmit={(e) => handleClick(e)}>
+      <form
+        className="flex gap-2 justify-center"
+        onSubmit={(e) => addChoice(e)}
+      >
         <input
+          className="h-10 w-60 p-2 rounded-md border border-slate-300"
           type="text"
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
           placeholder="Ex: Merguez [Enter] Broccoli [Enter]"
         />
-        <button>+</button>
+        <button
+          className={`btn ${
+            theme === 'broccoli' ? 'btn-primary-b' : 'btn-primary-m'
+          } w-10`}
+          theme={theme}
+        >
+          +
+        </button>
       </form>
-      <button onClick={removeChoices} disabled={!choices.length}>
-        Tout supprimer
-      </button>
-      {choices?.map((choice, i) => (
-        <p key={`choice-${i}`}>{choice}</p>
-      ))}
-      <button onClick={showResult} disabled={!choices.length}>
+      {choices.length > 0 && (
+        <>
+          <button
+            className="btn btn-tertiary"
+            onClick={removeChoices}
+            disabled={!choices.length}
+          >
+            Tout supprimer
+          </button>
+          <List list={choices} />
+        </>
+      )}
+
+      <button
+        className="btn btn-secondary mt-8"
+        onClick={showResult}
+        disabled={!choices.length}
+      >
         Tirer au sort
       </button>
     </>

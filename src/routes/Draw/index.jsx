@@ -1,26 +1,20 @@
 import { useState } from 'react'
-import styled from 'styled-components'
 
 import CreateDraw from './../../components/CreateDraw'
 import DrawResult from './../../components/DrawResult'
 
-const Wrapper = styled.div`
-  text-align: center;
-  padding: 5rem;
-  background-color: rgba(255, 255, 255, 0.7);
-  max-width: 600px;
-  margin: auto;
-  border-radius: 10px;
-`
-
 function Draw() {
-  const [choices, setChoices] = useState([])
+  const [choices, setChoices] = useState([]) //TODO : maybe is better with useContext ?
   const [showResult, setShowResult] = useState(false)
 
   return (
-    <Wrapper>
+    <div className="prose max-w-xl bg-white/70 m-auto rounded-lg p-4 text-center">
       {showResult ? (
-        <DrawResult choices={choices} setChoices={setChoices} />
+        <DrawResult
+          choices={choices}
+          setChoices={setChoices}
+          setShowResult={setShowResult}
+        />
       ) : (
         <CreateDraw
           choices={choices}
@@ -28,7 +22,7 @@ function Draw() {
           setShowResult={setShowResult}
         />
       )}
-    </Wrapper>
+    </div>
   )
 }
 
