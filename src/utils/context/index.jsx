@@ -22,13 +22,29 @@ export const ElementsDrawProvider = ({ children }) => {
   const saveElementsDraw = (newElement) => {
     setElementsDraw([...elementsDraw, newElement])
   }
-  const removeElementsDraw = () => {
+  const removeAllElementsDraw = () => {
     setElementsDraw([])
+  }
+  const removeElementsDraw = (el) => {
+    const newDrawList = elementsDraw.filter((curr) => curr !== el)
+    setElementsDraw(newDrawList)
+  }
+  const updateElementDraw = (i, newValue) => {
+    const newDrawList = elementsDraw.map((curr, index) =>
+      index === i ? newValue : curr
+    )
+    setElementsDraw(newDrawList)
   }
 
   return (
     <ElementsDrawContext.Provider
-      value={{ elementsDraw, saveElementsDraw, removeElementsDraw }}
+      value={{
+        elementsDraw,
+        saveElementsDraw,
+        removeElementsDraw,
+        removeAllElementsDraw,
+        updateElementDraw,
+      }}
     >
       {children}
     </ElementsDrawContext.Provider>

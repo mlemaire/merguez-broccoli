@@ -7,7 +7,18 @@ export const useTheme = () => {
 }
 
 export const useElementsDraw = () => {
-  const { elementsDraw, saveElementsDraw, removeElementsDraw } =
-    useContext(ElementsDrawContext)
-  return { elementsDraw, saveElementsDraw, removeElementsDraw }
+  const {
+    elementsDraw,
+    saveElementsDraw,
+    removeElementsDraw,
+    removeAllElementsDraw,
+    updateElementDraw,
+  } = useContext(ElementsDrawContext)
+  return {
+    elementsDraw,
+    saveElementsDraw,
+    removeElementsDraw,
+    removeAllElementsDraw,
+    updateElementDraw,
+  }
 }

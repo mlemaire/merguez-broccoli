@@ -5,7 +5,7 @@ import Loader from '../Loader'
 
 function DrawResult({ setShowResult }) {
   const { elementsDraw } = useElementsDraw()
-  const { theme } = useTheme
+  const { theme } = useTheme()
   const [isLoading, setLoading] = useState(true)
   const [isSelectedId, setSelectedId] = useState(null)
   const [isCurrentId, setCurrentId] = useState(0)
@@ -15,14 +15,13 @@ function DrawResult({ setShowResult }) {
   const chooseWinner = () => {
     setLoading(true)
     const winner = Math.floor(Math.random() * elementsDraw.length)
-    // const winner = 2
 
     let count = 0
 
     const intervalId = setInterval(() => {
       setCurrentId((isCurrentId) => {
         if (
-          count > elementsDraw.length * 2 &&
+          count > elementsDraw.length &&
           (winner === 0 ? isCurrentId === maxId : isCurrentId === winner - 1)
         ) {
           setSelectedId(winner)
@@ -52,6 +51,7 @@ function DrawResult({ setShowResult }) {
   return (
     <>
       {isLoading ? <Loader /> : <h2 className="h-10 block">Le gagnant est</h2>}
+
       <List
         isSelectedId={isSelectedId}
         isCurrentId={isCurrentId}
