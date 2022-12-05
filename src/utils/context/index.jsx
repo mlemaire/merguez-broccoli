@@ -19,21 +19,28 @@ export const ElementsDrawContext = createContext()
 
 export const ElementsDrawProvider = ({ children }) => {
   const [elementsDraw, setElementsDraw] = useState([])
+
   const saveElementsDraw = (newElement) => {
-    setElementsDraw([...elementsDraw, newElement])
+    setElementsDraw([...elementsDraw, { value: newElement, cheat: false }])
   }
   const removeAllElementsDraw = () => {
     setElementsDraw([])
   }
   const removeElementsDraw = (el) => {
-    const newDrawList = elementsDraw.filter((curr) => curr !== el)
+    const newDrawList = elementsDraw.filter((curr) => curr.value !== el.value)
     setElementsDraw(newDrawList)
   }
   const updateElementDraw = (i, newValue) => {
-    const newDrawList = elementsDraw.map((curr, index) =>
-      index === i ? newValue : curr
-    )
+    const newDrawList = elementsDraw.map((curr, index) => {
+      return { ...curr, value: index === i ? newValue : curr.value }
+    })
     setElementsDraw(newDrawList)
+  }
+  const setCheat = (value) => {
+    const newCheatList = elementsDraw.map((curr) => {
+      return { ...curr, cheat: curr.value === value ? true : false }
+    })
+    setElementsDraw(newCheatList)
   }
 
   return (
@@ -44,6 +51,7 @@ export const ElementsDrawProvider = ({ children }) => {
         removeElementsDraw,
         removeAllElementsDraw,
         updateElementDraw,
+        setCheat,
       }}
     >
       {children}

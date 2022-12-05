@@ -19,7 +19,8 @@ function Footer() {
           checked={theme === 'broccoli' ? 'checked' : ''}
           readOnly={true}
           id="toogleTheme"
-          className="h-0 w-0 opacity-0 invisible"
+          className="h-0 w-0 opacity-0"
+          //TODO: add accessible for change value with the keyboard
         />
       </div>
     </div>

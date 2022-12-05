@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useElementsDraw, useTheme } from '../../utils/hooks'
+import {
+  useElementsCheatDraw,
+  useElementsDraw,
+  useTheme,
+} from '../../utils/hooks'
 import List from '../List'
 import Loader from '../Loader'
 
@@ -14,7 +18,15 @@ function DrawResult({ setShowResult }) {
 
   const chooseWinner = () => {
     setLoading(true)
-    const winner = Math.floor(Math.random() * elementsDraw.length)
+    let winner = Math.floor(Math.random() * elementsDraw.length)
+
+    if (elementsDraw[winner].cheat) {
+      if (winner < maxId) {
+        winner++
+      } else {
+        winner = 0
+      }
+    }
 
     let count = 0
 
@@ -61,10 +73,15 @@ function DrawResult({ setShowResult }) {
         <button
           className="btn btn-secondary mb-4 sm:mr-4 sm:mb-0"
           onClick={back}
+          disabled={isLoading}
         >
           ⎌ Modifier
         </button>
-        <button className="btn btn-secondary" onClick={restartDraw}>
+        <button
+          className="btn btn-secondary"
+          onClick={restartDraw}
+          disabled={isLoading}
+        >
           ⇤ Nouveau tirage
         </button>
       </div>
