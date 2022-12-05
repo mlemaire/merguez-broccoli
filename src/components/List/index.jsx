@@ -15,6 +15,7 @@ function List({
   const updateDraw = (e, el) => {
     updateElementDraw(e, el)
   }
+
   return (
     <ul className="flex flex-row gap-4 justify-center p-0 flex-wrap">
       {elementsDraw?.map((el, i) => (
@@ -35,7 +36,7 @@ function List({
               <input
                 type="text"
                 size={10}
-                defaultValue={el}
+                defaultValue={el.value}
                 onChange={(e) => updateDraw(i, e.target.value)}
                 className="m-0 border-b border-slate-300 bg-transparent"
               />
@@ -45,7 +46,7 @@ function List({
               </button>
             </>
           ) : (
-            el
+            el.value
           )}
         </li>
       ))}

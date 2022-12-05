@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useTheme, useElementsDraw } from '../../utils/hooks'
 import Cheat from '../Cheat'
 import List from '../List'
+import Modal from '../Modal'
 
 function CreateDraw({ setShowResult }) {
   const { elementsDraw, saveElementsDraw, removeAllElementsDraw } =

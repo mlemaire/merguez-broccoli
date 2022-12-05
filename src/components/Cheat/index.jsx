@@ -1,35 +1,70 @@
-import { useState } from 'react'
-import { useElementsDraw } from '../../utils/hooks'
+import { useRef, useState } from 'react'
+import { useElementsDraw, useFetch } from '../../utils/hooks'
+
+import Loader from '../Loader'
+import Modal from '../Modal'
 
 import './style.css'
 
 function Cheat() {
   const [showModal, setShowModal] = useState(false)
-  const { elementsDraw, removeElementsDraw, updateElementDraw } =
-    useElementsDraw()
+
+  const { elementsDraw, setCheat } = useElementsDraw()
+
+  const { data, isLoading, error } = useFetch({
+    url: 'https://api.giphy.com/v1/gifs/random?api_key=WZymHDV26dR2IOzDba9N6KCfnC7JKydg&tag=cheating+course&rating=g',
+    cond: showModal,
+  })
+
+  const cheatingGifUrl = data?.data?.images?.downsized_medium?.url
+  const cheatRef = useRef()
+
+  const handleClick = () => {
+    setCheat(cheatRef.current.value)
+    setShowModal(false)
+  }
+
+  if (error) {
+    return <span>Oupsss 🙈</span>
+  }
 
   return (
     <>
-      <button onClick={() => setShowModal(true)} aria-label="tricher">
+      <button
+        type="button"
+        onClick={() => setShowModal(true)}
+        aria-label="triche va y c'est gratuit"
+        aria-controls="modal"
+        className="p-4 focus:bg-slate-700"
+      >
         🥸
       </button>
-      <div className={showModal ? 'block' : 'hidden'}>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-white z-30 rounded-lg">
-          <p>😱 Tu vas vraiment tricher? 🥺</p>
-          <p>Alors selectionne qui ne peut être tiré au sort</p>
-          <select>
+      <Modal showModal={showModal} setShowModal={setShowModal} id="modal">
+        <p>😱 Tu vas vraiment tricher? 🥺</p>
+        <p>Alors selectionne qui ne peut être tiré au sort</p>
+        <select disabled={!elementsDraw.length} ref={cheatRef}>
+          {elementsDraw.length ? (
             <option>Choisir la valeur à ne pas sélectionner</option>
-            {elementsDraw.map((el) => (
-              <option>{el}</option>
-            ))}
-          </select>
-          <button aria-label="Validate your cheat">🤫</button>
-        </div>
-        <div
-          className="fixed top-0 left-0 right-0 bottom-0 bg-slate-900 opacity-70 z-20 cursor-pointer"
-          onClick={() => setShowModal(false)}
-        ></div>
-      </div>
+          ) : (
+            <option>Ajoute d'abord des éléments à selectionner</option>
+          )}
+          {elementsDraw.map((el, i) => (
+            <option key={`opt-${i}`}>{el.value}</option>
+          ))}
+        </select>
+        <button
+          aria-label="Validate your cheat"
+          className="p-4 focus:bg-slate-700"
+          onClick={handleClick}
+        >
+          🤫
+        </button>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <img className="m-auto my-4" src={cheatingGifUrl} alt="" />
+        )}
+      </Modal>
     </>
   )
 }
