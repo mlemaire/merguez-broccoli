@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  useElementsCheatDraw,
-  useElementsDraw,
-  useTheme,
-} from '../../utils/hooks'
+import { useElementsDraw, useTheme } from '../../utils/hooks'
 import List from '../List'
 import Loader from '../Loader'
 
@@ -71,14 +67,14 @@ function DrawResult({ setShowResult }) {
       />
       <div className="flex flex-col justify-center sm:flex-row">
         <button
-          className="btn btn-secondary mb-4 sm:mr-4 sm:mb-0"
+          className="btn btn-text--xl btn--large btn-secondary mb-4 sm:mr-4 sm:mb-0"
           onClick={back}
           disabled={isLoading}
         >
           ⎌ Modifier
         </button>
         <button
-          className="btn btn-secondary"
+          className="btn btn-text--xl btn--large btn-primary"
           onClick={restartDraw}
           disabled={isLoading}
         >

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
+import ReactDOM from 'react-dom'
 
-function Modal({ children, showModal, setShowModal, id }) {
+function Modal({ children, showModal, setShowModal, id, customClass }) {
   const modalRef = useRef()
 
   const close = () => {
@@ -52,33 +53,37 @@ function Modal({ children, showModal, setShowModal, id }) {
     return () => document.removeEventListener('keydown', keyListener)
   }, [])
 
-  return (
-    <>
+  return ReactDOM.createPortal(
+    <div
+      id={id}
+      role="dialog"
+      aria-labelledby="tricher lors du tirage au sort"
+      aria-hidden={showModal ? false : true}
+      aria-modal="true"
+      tabIndex="-1"
+      className={`${showModal ? 'block' : 'hidden'} ${customClass}`}
+    >
       <div
-        id={id}
-        role="dialog"
-        aria-labelledby="tricher lors du tirage au sort"
-        aria-hidden={showModal ? false : true}
-        aria-modal="true"
-        tabIndex="-1"
-        className={showModal ? 'block' : 'hidden'}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full sm:w-3/4 lg:w-1/2 min-h-1/2 bg-white z-30 sm:rounded-lg"
+        role="document"
+        ref={modalRef}
       >
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full  sm:w-1/2 min-h-1/2 bg-white z-30 sm:rounded-lg "
-          role="document"
-          ref={modalRef}
-        >
-          <button type="button" aria-label="Fermer la modal" onClick={close}>
-            X
-          </button>
-          {children}
-        </div>
-        <div
-          className={`fixed top-0 left-0 right-0 bottom-0 bg-slate-900/70 z-20 cursor-pointer`}
+        <button
+          type="button"
+          aria-label="Fermer la modal"
           onClick={close}
-        ></div>
+          className="btn btn-secondary absolute top-0 right-0 m-2"
+        >
+          X
+        </button>
+        {children}
       </div>
-    </>
+      <div
+        className={`fixed top-0 left-0 right-0 bottom-0 bg-slate-900/70 z-20 cursor-pointer`}
+        onClick={close}
+      ></div>
+    </div>,
+    document.body
   )
 }
 

@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { useTheme, useElementsDraw } from '../../utils/hooks'
 import Cheat from '../Cheat'
 import List from '../List'
-import Modal from '../Modal'
 
 function CreateDraw({ setShowResult }) {
   const { elementsDraw, saveElementsDraw, removeAllElementsDraw } =
@@ -31,15 +30,15 @@ function CreateDraw({ setShowResult }) {
       </p>
       <form className="flex gap-2 justify-center" onSubmit={onSubmit}>
         <input
-          className="h-10 w-60 p-2 rounded-md border border-slate-300"
+          className="h-11 w-60 p-2 rounded-md border border-slate-300"
           type="text"
           ref={inputRef}
           placeholder="Ex: Merguez [Enter] Broccoli [Enter]"
         />
         <button
           type="submit"
-          className={`btn ${
-            theme === 'broccoli' ? 'btn-primary-b' : 'btn-primary-m'
+          className={`btn btn-text--xxl ${
+            theme === 'broccoli' ? 'btn-primary--b' : 'btn-primary--m'
           } w-10`}
           theme={theme}
         >
@@ -58,15 +57,16 @@ function CreateDraw({ setShowResult }) {
           <List isEditable={true} />
         </>
       )}
-
-      <button
-        className="btn btn-secondary mt-8"
-        onClick={showResult}
-        disabled={!elementsDraw.length}
-      >
-        Tirer au sort
-      </button>
-      <Cheat />
+      <div className="relative">
+        <button
+          className="btn btn-text--xl btn--large btn-primary mt-8 relative z-10"
+          onClick={showResult}
+          disabled={!elementsDraw.length}
+        >
+          Tirer au sort
+        </button>
+        <Cheat />
+      </div>
     </>
   )
 }

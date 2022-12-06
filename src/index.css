@@ -3,35 +3,72 @@
 @tailwind utilities;
 
 .btn {
-  @apply px-4 py-2 rounded-md transition-colors;
+  @apply px-4 py-2 rounded-md transition-all;
 }
 
-.btn-primary-b {
-  @apply bg-emerald-800 text-white text-3xl p-0;
+.btn-text--xl {
+  @apply text-2xl;
 }
 
-.btn-primary-m {
-  @apply bg-red-800 text-white text-3xl p-0;
+.btn-text--xxl {
+  @apply text-3xl;
 }
 
-.btn-primary-b:hover {
+.btn--large {
+  @apply px-10;
+}
+
+.btn-primary {
+  @apply bg-cyan-600 text-white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  @apply bg-cyan-500;
+}
+
+.btn-primary:active:not(:disabled) {
+  @apply bg-cyan-400;
+}
+
+.btn-primary--b {
+  @apply bg-emerald-800 text-white p-0;
+}
+
+.btn-primary--m {
+  @apply bg-red-800 text-white p-0;
+}
+
+.btn-primary--b:hover {
+  @apply bg-emerald-700;
+}
+
+.btn-primary--m:hover {
+  @apply bg-red-700;
+}
+
+.btn-primary--b:active {
   @apply bg-emerald-600;
 }
 
-.btn-primary-m:hover {
+.btn-primary--m:active {
   @apply bg-red-600;
 }
 
 .btn-secondary {
-  @apply bg-cyan-600 text-white text-2xl px-10;
+  @apply bg-slate-700 text-white;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  @apply bg-cyan-500;
+  @apply bg-slate-600;
 }
 
+.btn-secondary:active:not(:disabled) {
+  @apply bg-slate-500;
+}
+
+.btn-primary:disabled,
 .btn-secondary:disabled {
-  @apply bg-slate-400 cursor-not-allowed;
+  @apply bg-slate-400 cursor-not-allowed grayscale;
 }
 
 .btn-tertiary {
@@ -39,6 +76,10 @@
 }
 
 .btn-tertiary:hover {
+  @apply text-cyan-600;
+}
+
+.btn-tertiary:active {
   @apply text-cyan-500;
 }
 
