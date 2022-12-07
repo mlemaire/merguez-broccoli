@@ -35,14 +35,24 @@ function Cheat() {
         onClick={() => setShowModal(true)}
         aria-label="triche va y c'est gratuit"
         aria-controls="modal"
-        className="p-4 focus:bg-slate-700"
+        title="triche va y c'est gratuit"
+        className="btn btn-secondary absolute -bottom-2 left-1/2 z-0 -translate-x-1/2 -rotate-3 transition-transform duration-300 ml-16 hover:translate-y-7"
       >
         🥸
       </button>
-      <Modal showModal={showModal} setShowModal={setShowModal} id="modal">
-        <p>😱 Tu vas vraiment tricher? 🥺</p>
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        id="modal"
+        customClass={'prose text-center mt-4'}
+      >
+        <h2>😱 Tu vas vraiment tricher? 🥺</h2>
         <p>Alors selectionne qui ne peut être tiré au sort</p>
-        <select disabled={!elementsDraw.length} ref={cheatRef}>
+        <select
+          disabled={!elementsDraw.length}
+          ref={cheatRef}
+          className="rounded-md p-2 mr-2 border border-slate-300 h-11"
+        >
           {elementsDraw.length ? (
             <option>Choisir la valeur à ne pas sélectionner</option>
           ) : (
@@ -54,8 +64,9 @@ function Cheat() {
         </select>
         <button
           aria-label="Validate your cheat"
-          className="p-4 focus:bg-slate-700"
+          className="btn btn-primary"
           onClick={handleClick}
+          disabled={!elementsDraw.length}
         >
           🤫
         </button>

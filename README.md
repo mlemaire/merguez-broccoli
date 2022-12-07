@@ -1,4 +1,29 @@
-# Getting Started with Create React App
+# Why this project
+
+this repo is a personal exercise to learn react
+
+## But what is this ? Merguez Broccoli ?
+
+Allows you to draw lots between different elements (
+ex: who will do the dishes?
+-> Tom | Bob | both
+What are we eating tonight?
+-> The laziness, we order a pizza | pasta | ratatouille | merguez and broccoli
+
+Adding a cheat option allowing you to automatically exclude a result, yes yes Bob, I see you coming for not doing the dishes...
+
+Added 2 themes, yes it's useless but I wanted to put into practice so you can choose your theme between ~~dark or light~~ Merguez or broccoli of course
+
+### TODO list
+
+- Add confimation when you cheat
+- Switch to typeScript
+- see to load the modal outside the Root tag for accessibility (without using react-modal)
+- Add a page on the side to play with the routing
+
+---
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
