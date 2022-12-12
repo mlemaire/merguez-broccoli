@@ -1,7 +1,8 @@
+import React from 'react'
 import { useState } from 'react'
 
-import CreateDraw from './../../components/CreateDraw'
-import DrawResult from './../../components/DrawResult'
+import CreateDraw from '../../components/CreateDraw'
+import DrawResult from '../../components/DrawResult'
 
 function Draw() {
   const [showResult, setShowResult] = useState(false)

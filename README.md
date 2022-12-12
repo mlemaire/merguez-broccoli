@@ -17,9 +17,9 @@ Added 2 themes, yes it's useless but I wanted to put into practice so you can ch
 ### TODO list
 
 - Add confimation when you cheat
-- Switch to typeScript
-- see to load the modal outside the Root tag for accessibility (without using react-modal)
 - Add a page on the side to play with the routing
+- restart a draw by excluding the previously validated item
+- focus
 
 ---
 

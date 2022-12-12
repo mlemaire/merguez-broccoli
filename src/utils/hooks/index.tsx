@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { ThemeContext, ElementsDrawContext } from './../context'
+import { ThemeContext, ElementsDrawContext } from '../context'
 
 export const useTheme = () => {
   const { theme, toogleTheme } = useContext(ThemeContext)
@@ -25,10 +25,21 @@ export const useElementsDraw = () => {
   }
 }
 
-export const useFetch = ({ url, cond = true }) => {
-  const [data, setData] = useState({})
-  const [isLoading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+type IProps = {
+  url: string
+  cond: boolean
+}
+
+type ReturnType = {
+  data: any
+  isLoading: boolean
+  error: object
+}
+
+export const useFetch = ({ url, cond = true }: IProps): ReturnType => {
+  const [data, setData] = useState<object>({})
+  const [isLoading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<any | null>(null)
 
   useEffect(() => {
     if (!url) return

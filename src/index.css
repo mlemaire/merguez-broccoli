@@ -96,3 +96,6 @@
   @apply bg-slate-800;
   @apply active:after:w-7 active:after:left-4;
 }
+.toogle-btn:has(input:focus) label {
+  @apply shadow-focus;
+}

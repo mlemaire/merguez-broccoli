@@ -1,14 +1,19 @@
+import React from 'react'
 import { useEffect, useState } from 'react'
 import { useElementsDraw, useTheme } from '../../utils/hooks'
 import List from '../List'
 import Loader from '../Loader'
 
-function DrawResult({ setShowResult }) {
+type IProps = {
+  setShowResult: (boolean: boolean) => void
+}
+
+function DrawResult({ setShowResult }: IProps) {
   const { elementsDraw } = useElementsDraw()
   const { theme } = useTheme()
   const [isLoading, setLoading] = useState(true)
-  const [isSelectedId, setSelectedId] = useState(null)
-  const [isCurrentId, setCurrentId] = useState(0)
+  const [isSelectedId, setSelectedId] = useState<number | null>(null)
+  const [isCurrentId, setCurrentId] = useState<number | null>(0)
 
   const maxId = elementsDraw.length - 1
 
@@ -37,7 +42,9 @@ function DrawResult({ setShowResult }) {
           clearInterval(intervalId)
           return null
         }
-        return isCurrentId === maxId ? 0 : isCurrentId + 1
+        return isCurrentId !== maxId && isCurrentId !== null
+          ? isCurrentId + 1
+          : 0
       })
       count++
     }, 500)
