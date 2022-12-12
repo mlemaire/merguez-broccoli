@@ -1,19 +1,26 @@
+import React from 'react'
 import { useRef } from 'react'
 import { useTheme, useElementsDraw } from '../../utils/hooks'
 import Cheat from '../Cheat'
 import List from '../List'
 
-function CreateDraw({ setShowResult }) {
+type IProps = {
+  setShowResult: (boolean: boolean) => void
+}
+
+function CreateDraw({ setShowResult }: IProps) {
   const { elementsDraw, saveElementsDraw, removeAllElementsDraw } =
     useElementsDraw()
   const { theme } = useTheme()
-  const inputRef = useRef()
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: any) => {
     e.preventDefault()
-    if (inputRef.current.value === '') return
-    saveElementsDraw(inputRef.current.value)
-    inputRef.current.value = ''
+    if (inputRef.current?.value) {
+      if (inputRef.current.value === '') return
+      saveElementsDraw(inputRef.current.value)
+      inputRef.current.value = ''
+    }
   }
 
   const showResult = () => {
@@ -40,7 +47,6 @@ function CreateDraw({ setShowResult }) {
           className={`btn btn-text--xxl ${
             theme === 'broccoli' ? 'btn-primary--b' : 'btn-primary--m'
           } w-10`}
-          theme={theme}
         >
           +
         </button>

@@ -1,26 +1,22 @@
+import React from 'react'
 import { useRef, useState } from 'react'
 import { useElementsDraw, useFetch } from '../../utils/hooks'
 
 import Loader from '../Loader'
 import Modal from '../Modal'
 
-import './style.css'
-
 function Cheat() {
   const [showModal, setShowModal] = useState(false)
-
   const { elementsDraw, setCheat } = useElementsDraw()
-
   const { data, isLoading, error } = useFetch({
     url: 'https://api.giphy.com/v1/gifs/random?api_key=WZymHDV26dR2IOzDba9N6KCfnC7JKydg&tag=cheating+course&rating=g',
     cond: showModal,
   })
-
   const cheatingGifUrl = data?.data?.images?.downsized_medium?.url
-  const cheatRef = useRef()
+  const cheatRef = useRef<HTMLSelectElement>(null)
 
   const handleClick = () => {
-    setCheat(cheatRef.current.value)
+    cheatRef.current && setCheat(cheatRef.current.value)
     setShowModal(false)
   }
 

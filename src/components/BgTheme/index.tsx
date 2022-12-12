@@ -1,6 +1,7 @@
+import React from 'react'
 import { useTheme } from '../../utils/hooks'
-import Broccoli from './../../assets/broccoli.svg'
-import Merguez from './../../assets/merguez.svg'
+import Broccoli from '../../assets/broccoli.svg'
+import Merguez from '../../assets/merguez.svg'
 
 function BgTheme() {
   const { theme } = useTheme()
@@ -11,6 +12,7 @@ function BgTheme() {
       aria-hidden="true"
       src={theme === 'broccoli' ? Broccoli : Merguez}
     />
+    // <img src={process.env.PUBLIC_URL + `/images/twitter.svg`} alt="logo facebook"/>
   )
 }
 

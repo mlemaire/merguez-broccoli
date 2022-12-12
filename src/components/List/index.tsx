@@ -1,19 +1,32 @@
+import React from 'react'
 import { useElementsDraw } from '../../utils/hooks'
+
+type Iprops = {
+  isCurrentId?: number | null
+  isSelectedId?: number | null
+  isEditable?: boolean
+  theme?: any // TODO look that
+}
+
+type IElementDraw = {
+  value: string
+  cheat: boolean
+}
 
 function List({
   isCurrentId = null,
   isSelectedId = null,
   isEditable = false,
   theme,
-}) {
+}: Iprops) {
   const { elementsDraw, removeElementsDraw, updateElementDraw } =
     useElementsDraw()
 
-  const handleClick = (e) => {
+  const handleClick = (e: IElementDraw) => {
     removeElementsDraw(e)
   }
-  const updateDraw = (e, el) => {
-    updateElementDraw(e, el)
+  const updateDraw = (i: number, el: string) => {
+    updateElementDraw(i, el)
   }
 
   return (
