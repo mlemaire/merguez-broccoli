@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTheme } from '../../utils/hooks'
 import githubMark from '../../assets/github-mark-white.svg'
 
@@ -31,6 +30,7 @@ function Footer() {
         href="https://github.com/mlemaire/merguez-broccoli"
         target="_blank"
         className="flex items-center hover:underline"
+        rel="noreferrer"
       >
         <img
           src={githubMark}

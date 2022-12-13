@@ -1,4 +1,3 @@
-import React from 'react'
 import { useRef } from 'react'
 import { useTheme, useElementsDraw } from '../../utils/hooks'
 import Cheat from '../Cheat'

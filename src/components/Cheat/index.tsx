@@ -1,4 +1,3 @@
-import React from 'react'
 import { useRef, useState } from 'react'
 import { useElementsDraw, useFetch } from '../../utils/hooks'
 

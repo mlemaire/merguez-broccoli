@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTheme } from '../../utils/hooks'
 import Broccoli from '../../assets/broccoli.svg'
 import Merguez from '../../assets/merguez.svg'

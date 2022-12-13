@@ -1,4 +1,3 @@
-import React from 'react'
 import { useElementsDraw } from '../../utils/hooks'
 
 type Iprops = {
