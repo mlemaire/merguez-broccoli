@@ -1,0 +1,4 @@
+.btn.active,
+.btn.active:hover {
+  @apply bg-cyan-500 text-white;
+}

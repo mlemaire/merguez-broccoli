@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
 import { useElementsDraw, useTheme } from '../../utils/hooks'
 import List from '../List'

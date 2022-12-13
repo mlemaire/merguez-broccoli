@@ -1,4 +1,3 @@
-import React from 'react'
 import { useRouteError } from 'react-router-dom'
 import errorImg from '../../assets/error.svg'
 
@@ -8,7 +7,7 @@ export default function ErrorPage() {
 
   return (
     <div id="error-page" className="relative flex flex-col items-center">
-      <div className="text-center leading-tight mt-8">
+      <div className="text-center leading-tight">
         <h1 className="font-pacifico text-red-600 text-9xl md:text-[12rem]">
           {error.status}
         </h1>
@@ -16,7 +15,12 @@ export default function ErrorPage() {
           {error.statusText || error.message}
         </p>
       </div>
-      <img src={errorImg} className="w-full max-w-2xl" aria-hidden="true" />
+      <img
+        src={errorImg}
+        className="w-full max-w-2xl"
+        alt="Combat entre merguez et brocoli"
+        aria-hidden="true"
+      />
     </div>
   )
 }
